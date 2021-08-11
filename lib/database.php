@@ -2,10 +2,10 @@
 
 class Database {
 
-	private $hostname = "fdb18.awardspace.net";
-	private $username = "2680182_wpress40c909b4";
-	private $password = "bqRD964h3shQYEuJfP0pVPhzfaO6ruAj";
-	private $bd_name = "2680182_wpress40c909b4";
+	private $hostname = "localhost";
+	private $username = "root";
+	private $password = "";
+	private $bd_name = "oms";
 	public $conn;
 
 	public function __construct(){

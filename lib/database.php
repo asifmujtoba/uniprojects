@@ -5,13 +5,13 @@ class Database {
 	private $hostname = "localhost";
 	private $username = "root";
 	private $password = "";
-	private $bd_name = "oms";
+	private $db_name = "oms";
 	public $conn;
 
 	public function __construct(){
 		if (!isset($this->conn)) {
 			try {
-				$sql = new PDO("mysql:host=" . $this->hostname . ";dbname=" . $this->bd_name, $this->username, $this->password);
+				$sql = new PDO("mysql:host=" . $this->hostname . ";dbname=" . $this->db_name, $this->username, $this->password);
 				$sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$sql->exec("SET CHARACTER SET utf8");
 				$this->conn = $sql;

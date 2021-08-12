@@ -670,6 +670,13 @@ class Oms {
 			return $msg;
 		}
 	}
+	public function delete_task($id){
+		$sql = "DELETE FROM task WHERE id=$id";
+		$query = $this->db->conn->prepare($sql);
+		$query -> execute();
+		$result = $query->fetchAll();
+		return $result;
+	}
 
 	//View Task
 	public function view_task(){

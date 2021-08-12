@@ -64,10 +64,7 @@ $viewImp = $oms->view_employee();
                                             <input name="end_date" class="datetimepicker form-control flatpickr flatpicker-human flatpickr-input" placeholder="Select date.." tabindex="0" type="text" value="<?php echo $viewTask->end_date; ?>" readonly="readonly">
 											
                                         </div>
-                                        <!-- <div class="mb-3">
-												<label class="form-label">Human-friendly Dates</label>
-												<input name="end_date" class="datetimepicker form-control flatpickr flatpicker-human flatpickr-input" placeholder="Select date.." tabindex="0" type="text" value="<?php echo $viewTask->end_date; ?>" readonly="readonly">
-											</div> -->
+                                     
                                         <div class="form-group mb-3">
                                             <label>Completion</label>
                                             <input type="text" name="completion" class="form-control"  value="<?php echo $viewTask->completion; ?>">

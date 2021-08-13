@@ -3,8 +3,7 @@
 include 'header.php';
 
 if(isset($_POST['delete-task'])){
-    echo "Deleting";
-    $saveTask = $oms->delete_task($_POST['id']);
+    $deleteTask = $oms->delete_task($_POST['taskid']);
 }
 $viewTask = $oms->view_task();
 
@@ -13,6 +12,11 @@ $viewTask = $oms->view_task();
 				<div class="container-fluid p-0">
 
 					<h1 class="h3 mb-3">Task List</h1>
+                    <?php
+                        if(isset($deleteTask['su'])){
+                            echo $deleteTask['su'];
+                        }
+                    ?>
 
 					<div class="row">
 						<div class="col-12">
@@ -20,7 +24,7 @@ $viewTask = $oms->view_task();
 								<div class="card-header">
 									<h5 class="card-title mb-0"></h5>
 								</div>
-                                <form method="POST">
+                               
                                     
                                 <table width="100%" class="table table-hover my-0" id="dataTables-example">
                                 <thead>
@@ -68,9 +72,9 @@ $viewTask = $oms->view_task();
                                             ?>
                                             <td><a href="edit-task.php?view-id=<?php echo $viewValue['id']; ?>" class="btn btn-success btn-xs">Edit</a></td>
                                             <td>
-                                                <button class="dropbtn" type="submit" title="<?php echo $viewValue['id']; ?>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                <a onclick="validate(<?php echo $viewValue['id']?>  , '<?php echo $viewValue['task_name'] ;?>')" title="<?php echo $viewValue['task_name']; ?>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                                 Delete
-                                                </button>
+                                            </a>
                                             </td>                                        
                                         </tr>
                                         <?php
@@ -80,29 +84,29 @@ $viewTask = $oms->view_task();
                                     </tbody>
                                 </table>
                             <!-- Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
+                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="saveModalLabel">Do you want to delete the task?</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p><strong>Task Assigned To: <span id="assigned_to"> </strong></p>
+                                                <p><strong>Task id: <span id="t_id"> </strong></p>
                                                 <p><strong>Task Name: <span id="t_name"> </strong></p>
-                                                <p><strong>Task Details: <span id="details"> </strong></p>
-                                                <p><strong>Start Date: <span id="s_date"> </strong></p>
-                                                <p><strong>End Date: <span id="e_date"> </strong></p>
+                                                
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Don't</button>
-                                                <input class="taskid" type="hidden" name="id" value="">
-                                                <input type="submit" name="delete-task" class="btn btn-primary" value="Delete">
-                                            </div>
+                                                <form method="POST">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Don't</button>
+                                                    <input id="taskid" type="hidden" name="taskid" value="">
+                                                    <input type="submit" name="delete-task" class="btn btn-danger" value="Delete">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                                
 							</div>
 						</div>
 					</div>
@@ -110,16 +114,16 @@ $viewTask = $oms->view_task();
 				</div>
 			</main>
     <!-- /#main -->
-    
+       
 <script type="text/javascript">  
-$(document).ready(function(){
-    $('.dropbtn').click(function(){
-            var title = $(this).attr('title');
-            $('.taskid').val(title);
-            $('#t_name').add(title);
+    function validate(id, task_name){
+            console.log(id);
+        document.getElementById("taskid").value = id;
+        console.log(task_name);
+        document.getElementById("t_id").innerHTML = id;
+        document.getElementById("t_name").innerHTML = task_name;
+    }
 
-    })
-})
 </script>
  
     

@@ -671,11 +671,16 @@ class Oms {
 		}
 	}
 	public function delete_task($id){
-		$sql = "DELETE FROM task WHERE id=$id";
-		$query = $this->db->conn->prepare($sql);
-		$query -> execute();
-		$result = $query->fetchAll();
-		return $result;
+		try{
+			$sql = "DELETE FROM task WHERE id=$id";
+			$query = $this->db->conn->prepare($sql);
+			$query -> execute();
+			$msg['su'] = $this->alert('<strong>Success! </strong>Task deleted.', 'success');
+			return $msg;
+		}catch(PDOException $e){
+			echo $sql . "<br>" . $e->getMessage();
+		}
+		
 	}
 
 	//View Task
